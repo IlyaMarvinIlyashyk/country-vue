@@ -1,14 +1,56 @@
 <template>
-  <div class="card">
-      
-  </div>
+  <input type="text" name="search" id="search" ref="input" @input="search" />
+  <ul v-for="country in allCountries" v-bind:key="country.name">
+    <li>
+      <div class="card">
+        <h3>{{ country.name.common }}</h3>
+        <h4>{{ country.name.official }}</h4>
+        <span>{{ country.flag }}</span>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: {
     navTitle: String,
     navSubTitle: String,
+  },
+  data() {
+    return {
+      allCountries: null,
+      countries: [],
+      loading: false,
+    };
+  },
+  beforeMount() {
+    this.loading = true;
+    this.search(true);
+  },
+  methods: {
+    searchResults(searchString) {
+      axios.get(searchString).then((response) => {
+        this.countries = response.data;
+        this.allCountries = [];
+        for (let i = 0; i < 10 && i < this.countries.length; i++) {
+          this.allCountries.push(this.countries[i]);
+        }
+      });
+      return this.allCountries;
+    },
+    search() {
+      if (this.loading === true || this.$refs.input.value == "") {
+        this.searchResults(`https://restcountries.com/v3.1/all`);
+        this.loading = false;
+      } else {
+        this.searchResults(
+          `https://restcountries.com/v3.1/name/${this.$refs.input.value}`
+        );
+      }
+    },
   },
 };
 </script>

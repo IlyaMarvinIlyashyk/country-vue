@@ -25,7 +25,6 @@ export default {
       this.countries = response.data;
       for (let i = 0; i < 10 && i < this.countries.length; i++) {
         this.allCountries.push(this.countries[i]);
-        console.log(this.allCountries);
       }
     });
     return this.allCountries;

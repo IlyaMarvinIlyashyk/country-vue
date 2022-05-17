@@ -1,5 +1,6 @@
 <template>
-  <search-results></search-results>
+  <search-bar />
+  <search-results />
 </template>
 
 <script>
