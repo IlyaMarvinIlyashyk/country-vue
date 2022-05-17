@@ -19,14 +19,15 @@ export default {
 <style scoped>
 nav {
   display: block;
-  position: absolute;
+  position: static;
   top: 0;
   left: 0;
   width: 100vw;
-  background: #081101;
+  background: #111e07;
 }
 
 a {
+  display: inline-block;
   display: flex;
   align-self: flex-start;
   text-decoration: none;

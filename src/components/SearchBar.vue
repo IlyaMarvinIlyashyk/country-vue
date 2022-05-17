@@ -1,14 +1,18 @@
 <template>
-  <input type="text" name="search" id="search" ref="input" @input="search" />
-  <ul v-for="country in allCountries" v-bind:key="country.name">
-    <li>
-      <div class="card">
-        <h3>{{ country.name.common }}</h3>
-        <h4>{{ country.name.official }}</h4>
-        <span>{{ country.flag }}</span>
-      </div>
-    </li>
-  </ul>
+  <div class="searchComponent">
+    <input type="text" placeholder="search countries..." name="search" id="search" ref="input" @input="search" />
+    <ul v-for="country in allCountries" v-bind:key="country.name">
+      <li>
+        <div class="card">
+          <div>
+            <h3>{{ country.name.common }}</h3>
+            <h4>{{ country.name.official }}</h4>
+          </div>
+          <span>{{ country.flag }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -57,26 +61,61 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-nav {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  background: #081101;
+.searchComponent {
+  padding: 10rem;
+} 
+.searchComponent > input {
+  width: 100%;
+  height: 3rem;
+  padding: 16px
 }
 
-a {
-  display: flex;
-  align-self: flex-start;
+li {
+  list-style: none;
   text-decoration: none;
-  text-align: left;
+  padding: 10px 0;
 }
 
-a > span {
-  color: #aceca1;
-  font-size: 1.35rem;
-  font-weight: 600;
-  padding: 0.85rem;
+
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-auto-rows: 7rem;
+  vertical-align: centre;
+  border: 3px solid #111e07;
+}
+.card > * {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.card > :nth-child(1) {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+}
+.card > :nth-child(1) > * {
+  padding: 8px;
+}
+.card > :nth-child(1) > :nth-child(1){
+  font-size: 2.15rem;
+  font-weight: 500;
+}
+.card > :nth-child(1) > :nth-child(1){
+  font-size: 1.85rem;
+  font-weight: 300;
+}
+.card > :nth-child(2) {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  font-size: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-25%, -30%);
 }
 </style>
